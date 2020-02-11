@@ -6,7 +6,7 @@ function getLocalStorage(key) {
 }
 //  Creating the rows and columns //
 $(document).ready(function() {
-  $("#todaysDate").text(moment().format("dddd, MMMM Do"));
+  $("#todaysDate").text(moment().format(" Qo, h:m a, dddd, MMMM Do"));
   for (let i = 9; i < 18; i++) {
     var row = $(`<div data-time=${i} id='${i}' class="row">`);
     var col1 = $(
@@ -16,7 +16,7 @@ $(document).ready(function() {
       `<div class="col-sm-8 past"><textarea id=text${i} class="info" placeholder="input your task."></textarea>`
     );
     var col3 = $(
-      `<div class="col-sm-2"><button class="saveBtn" id=${i}><i class="fas fa-save"></i></button>`
+      `<div class="col-sm-2"><button class="saveButton" id=${i}><i class="fas fa-save"></i></button>`
     );
 
     row.append(col1);
@@ -36,10 +36,9 @@ $(document).ready(function() {
   }
   formatAMPM();
 
-  function updateColors() {
+  function changeColor() {
     var currentTime = new Date().getHours();
     for (var i = 9; i < 18; i++) {
-      console.log(currentTime, $(`#${i}`).data("time"));
       if ($(`#${i}`).data("time") == currentTime) {
         $(`#text${i}`).addClass("current");
       } else if (currentTime < $(`#${i}`).data("time")) {
@@ -49,11 +48,11 @@ $(document).ready(function() {
   }
 
   setInterval(function() {
-    updateColors();
+    changeColor();
   }, 1000);
 
-  var saveBtn = $(".saveBtn");
-  saveBtn.on("click", function() {
+  var saveButton = $(".saveButton");
+  saveButton.on("click", function() {
     let eventId = $(this).attr("id");
     let eventText = $(this)
       .parent()
