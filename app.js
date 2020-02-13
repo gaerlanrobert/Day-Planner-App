@@ -1,6 +1,6 @@
 // saving input to local storage //
 
-function getLocalStorage(key) {
+function storeLocal(key) {
   let value = localStorage.getItem(key);
   if (value) {
     $(`#text${key}`).text(value);
@@ -30,7 +30,7 @@ $(document).ready(function() {
       `<div class="col-sm-2"><button class="saveButton" id=${i}><i class="fas fa-save"></i></button>`
     );
 
-    // appending //
+    // appending rows to columns//
 
     row.append(col1);
     row.append(col2);
@@ -38,18 +38,12 @@ $(document).ready(function() {
 
     $(".container").append(row);
 
-    getLocalStorage(i);
+    storeLocal(i);
   }
-  // setting up function formating hours //
-  function formatAMPM(hours) {
-    var ampm = hours >= 12 ? "pm" : "am";
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    return hours + ampm;
-  }
+
   formatAMPM();
   // color change based on current time of day
-  function changeColor() {
+  function colorChanger() {
     var currentTime = new Date().getHours();
     for (var i = 9; i < 18; i++) {
       if ($(`#${i}`).data("time") == currentTime) {
@@ -60,8 +54,17 @@ $(document).ready(function() {
     }
   }
 
+  // setting up function formating hours //
+  function formatAMPM(localTime) {
+    var ampm = localTime >= 12 ? "pm" : "am";
+    localTime = localTime % 12;
+    localTime = localTime ? localTime : 12;
+
+    return localTime + ampm;
+  }
+
   setInterval(function() {
-    changeColor();
+    colorChanger();
   }, newLocal);
 
   // saving input to local storage with onclick of button //

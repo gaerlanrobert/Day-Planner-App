@@ -74,6 +74,9 @@ textarea {
 }
 
 .saveButton i:hover {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
   font-size: 50px;
   transition: all 0.3s ease-in;
 }
@@ -91,4 +94,9 @@ textarea {
 .future {
   background-color: #39f739;
   color: white;
+}
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
 }
